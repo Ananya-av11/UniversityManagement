@@ -1,0 +1,77 @@
+{% extends 'adminnav.html' %}
+    {% block content %}
+
+    <body style="background-image: url('https://thumbs.dreamstime.com/b/graduation-rear-view-student-university-graduates-crowded-cap-ceremony-174292908.jpg');background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
+        <div class="container d-flex align-items-center justify-content-center mb-5 mt-5">
+            <div class="card p-4 shadow-lg mt-5" style="max-width: 400px; width: 100%; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+        <!-- <div class="container w-50" style="border: 1px solid black; padding : 30px; margin-top: 160px; border-radius: 10px; box-shadow: 0 4px 10px rgb(0, 0, 0);"> -->
+            <h2 class="text-center">UPDATE STUDENT DETAILS</h2>
+                <form action="{% url 'edit_student' st.id %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <!-- <label for="">Username</label> -->
+                        <input type="text" class="form-control" name="sname" value="{{st.studentname}}">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="saddress"  value="{{st.address}}">
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="">Password</label> -->
+                        <input type="number" class="form-control" name="sage" value="{{st.age}}">
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" name="sdate" value="{{st.joiningdate|date:'Y-m-d'}}">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="courseDropdown" name="scourse" required> 
+                            {% for i in course %}
+                            {% if i.id == st.course.id %}
+                            <option value="{{i.id}}" selected>{{i.coursename}}</option>
+                            {% else %}
+                            <option value="{{i.id}}">{{i.coursename}}</option>
+                            {% endif %}
+                            {% endfor %} 
+                        </select>
+                        <!-- <select class="drop" name="c" id="courseDropdown" style="height: 30px; width: 200px; border-radius: 5px; border-color: transparent;">
+                            {% for i in course %}
+                                {% if i.id == st.course.id %}
+                                    <option value="{{c.id}}" selected>{{i.coursename}}</option>
+                                {% else %}
+                                    <option value="{{i.id}}"> {{i.coursename}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select> -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Update</button>
+                    </div>
+                    
+                </form>
+                {% for msg in messages %}
+                <h6>
+                    <div class="alert alert-danger alert-dismissible mt-3" >
+                    {{ msg }}
+                    </div>
+                </h6>
+            {% endfor %}
+        </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const selectedValue = "{{ st.course.id }}"; // Get the selected course ID
+                const dropdown = document.getElementById('courseDropdown'); // The dropdown element
+          
+                // Loop through each option in the dropdown and hide the selected one from the list
+                for (let option of dropdown.options) {
+                    if (option.value === selectedValue) {
+                        option.style.display = 'none'; // Hide the selected option from the list
+                        break;
+                    }
+                }
+            });
+          </script>
+    </body>
+
+    {% endblock %}

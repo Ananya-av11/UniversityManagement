@@ -1,0 +1,48 @@
+{% extends 'adminnav.html' %}
+    {% block content %}
+    <body style="background-image: url('https://static.vecteezy.com/system/resources/previews/036/752/066/non_2x/ai-generated-education-poster-template-with-large-copy-space-for-text-free-photo.jpg'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;">
+    <div class="content"  style="flex:1;">
+
+    <div class="container text-center mt-5 mb-5 align-items-center">
+        
+        <div class="table-responsive justify-content-center" >
+            <h1 class=" mb-4">DETAILS OF STUDENT</h1>
+        <table class="table table-responsive table-bordered table-hover" >
+            <tr class="bg-dark text-light">
+                
+                <th>Student Name</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Date of Join</th>
+                <th>Course Name</th>
+                <th>Course Fee</th>
+                <th colspan="2">Action</th>
+            </tr>
+            {% for i in st %}
+    
+            <tr class="text-center">
+                                
+                <td>{{i.studentname}}</td>
+                <td>{{i.address}}</td>          
+                <td>{{i.age}}</td>
+                <td>{{i.joiningdate}}</td>
+                <td>{{i.course.coursename}}</td>
+                <td>{{i.course.fees}}</td>
+                <td><button class="btn btn-primary">
+                    <a class="text-white" href="{% url 'updatestudent' i.id %}">Edit</a></button></td>
+                <td><button class="btn btn-danger">
+                    <a class="text-white" href="{% url 'deletestudent' i.id %}" style="color: black;">Delete</a></button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+</div>
+<footer style="background: #343a40; color: white; text-align: center; padding: 10px 0; width: 100%; position: sticky; bottom: 0;">
+    <p class="mb-0">© 2024 All Rights Reserved | Developed by Ananya Vijayan</p>
+</footer>    
+</body>
+    {% endblock %}

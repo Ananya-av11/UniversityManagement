@@ -1,0 +1,50 @@
+{% extends 'adminnav.html' %}
+    {% block content %}
+    <body style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/035/775/575/small/ai-generated-stack-of-books-and-apple-on-wooden-table-back-to-school-concept-books-on-a-wooden-table-with-a-teal-background-for-back-to-school-ai-generated-free-photo.jpg'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;">
+    <div class="content"  style="flex:1;">
+
+    <div class="container mt-5 mb-5 align-items-center">
+        <!-- <h1 class="mb-4" >DETAILS OF TEACHER</h1> -->
+        <div class="table-responsive align-items-center justify-content-center" >
+            <h1 class="mb-4" >DETAILS OF TEACHER</h1>
+            <!-- <h1 class="text-center mb-4" >DETAILS OF TEACHER</h1> -->
+        <table class="table table-responsive table-bordered table-hover" >
+            <tr class="bg-dark text-light">
+                
+                <th>Teacher Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                
+                <th>Course Name</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+            {% for i in te %}
+    
+            <tr class="text-center">
+                                
+                <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                <td>{{i.user.email}}</td>          
+                <td>{{i.age}}</td>
+                <td>{{i.course.coursename}}</td>
+                <td>
+                    <img src="{{i.image.url}}" alt="" width="75" height="75">
+                </td>
+                
+                
+                <td><button class="btn btn-danger">
+                    <a class="text-white" href="{% url 'deleteteacher' i.id %}">Delete</a></button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>  
+</div>
+<footer style="background: #343a40; color: white; text-align: center; padding: 10px 0; width: 100%; position: sticky; bottom: 0;">
+    <p class="mb-0">© 2024 All Rights Reserved | Developed by Ananya Vijayan</p>
+</footer>  
+</body>
+    {% endblock %}

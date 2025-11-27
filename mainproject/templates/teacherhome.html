@@ -1,0 +1,24 @@
+{% extends 'teachernav.html' %}
+    {% block content %}
+
+    <body style="background-image: url('https://media.istockphoto.com/id/1316061073/photo/global-education-online-study-school-course-e-learning-class-e-book-and-world-educational.jpg?s=612x612&w=0&k=20&c=f662Pa1-O-dO-XSsg2a8GHbBR09UL9czyG_9bmdIsuY='); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;">
+    <div class="content"  style="flex:1;">
+        <div class="container">
+            {% for msg in messages %}
+                <h4>
+                    <div class="alert alert-light mt-3 text-center alert-dismissible" style="color: black;" >
+                    {{ msg }}
+                    </div>
+                </h4>
+            {% endfor %}
+        </div>
+    </div>
+    <footer style="background: #343a40; color: white; text-align: center; padding: 10px 0; width: 100%; position: sticky; bottom: 0;">
+        <p class="mb-0">© 2024 All Rights Reserved | Developed by Ananya Vijayan</p>
+    </footer>
+    </body>
+
+    {% endblock %}

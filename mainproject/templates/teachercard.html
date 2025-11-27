@@ -1,0 +1,38 @@
+{% extends 'teachernav.html' %}
+{% block content %}
+<body style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/050/104/685/small_2x/student-creative-desktop-earth-globe-with-graduation-hat-on-hardcover-book-and-multicolor-chalks-copy-space-for-text-back-to-school-education-concept-photo.JPG'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;
+display: flex;
+    flex-direction: column;
+    min-height: 100vh;">
+    <div class="content"  style="flex:1;">
+    
+ 
+    <!-- <div class="container mt-5 p-0 text-center w-25" style="background-color: bisque;"> -->
+        <div class="container d-flex align-items-center justify-content-center mb-5 mt-5">
+            <div class="card shadow-lg mt-5" style="max-width: 400px; width: 100%; background:bisque; border-radius: 10px;">
+    <div class="card-header text-center">TEACHER PROFILE</div> 
+        <div class="card-body text-center"> 
+            {% if tcr %}
+            <h2>{{ tcr.user.first_name }} {{ tcr.user.last_name }}</h2>
+            <p>Address: {{ tcr.address }}</p>
+            <p>Age: {{ tcr.age }}</p>
+            <p>email: {{ tcr.user.email }}</p>
+            <p>Phone: {{ tcr.phone }}</p>
+            <p>Course: {{ tcr.course.coursename }}</p>
+            
+            {% if tcr.image %}
+                <img src="{{ tcr.image.url }}" alt="Teacher Image" width="100" height="100">
+             {% endif %}
+        {% else %}
+            <p>No teacher details found.</p>
+        {% endif %}
+        
+    </div>
+    </div>
+    </div>
+</div>
+<footer style="background: #343a40; color: white; text-align: center; padding: 10px 0; width: 100%; position: sticky; bottom: 0;">
+    <p class="mb-0">© 2024 All Rights Reserved | Developed by Ananya Vijayan</p>
+</footer>
+</body>
+{% endblock %}

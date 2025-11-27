@@ -1,0 +1,91 @@
+{% extends 'teachernav.html' %}
+{% block content %}
+
+<body style="background-image: url('https://img.jakpost.net/c/2017/02/21/2017_02_21_21979_1487670946._large.jpg'); background-repeat: no-repeat; background-size: cover;
+display: flex;
+    flex-direction: column;
+    min-height: 100vh;">
+    <div class="content"  style="flex:1;">
+    <div class="container d-flex align-items-center justify-content-center mb-5 mt-5">
+        <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+    <!-- <div class="container text-center w-50 border mt-5 mb-5 p-5"> -->
+        <h2 class="text-center">UPDATE DETAILS</h2>
+            <form action="{% url 'edit_teacher' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <!-- <label for="">Username</label> -->
+                    <input type="text" class="form-control" name="fname" value="{{tchr.user.first_name}}" >
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="lname" value="{{tchr.user.last_name}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="uname" value="{{tchr.user.username}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="address" value="{{tchr.address}}">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="age" value="{{tchr.age}}">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" value="{{tchr.user.email}}">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="phone" value="{{tchr.phone}}">
+                </div>
+                
+                
+                <div class="form-group">
+                    <img src="{{tchr.image.url}}" alt="" height="100" width="100">{{tchr.image}}
+                    <input type="file" class="form-control" name="img">
+                </div>
+                <div class="form-group">
+                    <select id="courseDropdown" class="form-control" name="tcourse" required placeholder="Course"> 
+                        {% for i in crse %}
+                            {% if i.id == tchr.course.id %}
+                            <option value="{{i.id}}" selected>{{i.coursename}}</option>
+                            {% else %}
+                            <option value="{{i.id}}">{{i.coursename}}</option>
+                            {% endif %}
+                            {% endfor %} 
+                    </select>
+                    
+                </div>                
+
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Update</button>
+                </div>
+                
+            </form>
+            {% for msg in messages %}
+                <h6>
+                    <div class="alert alert-danger alert-dismissible mt-3">
+                    {{ msg }}
+                    </div>
+                </h6>
+            {% endfor %}
+    </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectedValue = "{{ tchr.course.id }}"; // Get the selected course ID
+        const dropdown = document.getElementById('courseDropdown'); // The dropdown element
+  
+        // Loop through each option in the dropdown and hide the selected one from the list
+        for (let option of dropdown.options) {
+            if (option.value === selectedValue) {
+                option.style.display = 'none'; // Hide the selected option from the list
+                break;
+            }
+        }
+    });
+  </script>
+<footer class="card-footer bg-dark text-white text-center py-3">
+    <p class="mb-0">2024 All rights reserved &copy; University Project | Developed & Maintained by Ananya Vijayan</p>
+    </footer>
+</body>
+
+{% endblock %}
